@@ -1,0 +1,39 @@
+
+<app-loading *ngIf="isLoading" class="loading-container in-dialog"></app-loading>
+
+<h2 mat-dialog-title>Confirmați rezervarea</h2>
+
+<mat-dialog-content>
+  <mat-list>
+    <mat-list-item class="no-padding">
+      <mat-icon mat-list-icon>local_laundry_service</mat-icon>
+      <div mat-line>Mașină</div>
+      <div mat-line>{{ data.instance.name }}</div>
+    </mat-list-item>
+    <mat-list-item class="no-padding">
+      <mat-icon mat-list-icon>schedule</mat-icon>
+      <div mat-line>Program</div>
+      <div mat-line>{{ programme.name }} ({{ programme.duration}} min.)</div>
+    </mat-list-item>
+    <mat-list-item class="no-padding">
+      <mat-icon mat-list-icon>event</mat-icon>
+      <div mat-line>Data de început</div>
+      <div mat-line>{{ data.slot | date: 'd MMMM yyyy, HH:mm'}}</div>
+    </mat-list-item>
+    <mat-list-item class="no-padding">
+      <mat-icon mat-list-icon>event</mat-icon>
+      <div mat-line>Data de sfârșit</div>
+      <div mat-line>{{ endDate | date: 'd MMMM yyyy, HH:mm'}}</div>
+    </mat-list-item>
+    <mat-list-item class="no-padding">
+      <mat-icon mat-list-icon>person</mat-icon>
+      <div mat-line>Utilizator</div>
+      <div mat-line>{{ user.firstName }} {{ user.lastName }}</div>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Anulați</button>
+  <button mat-button color="primary" (click)="confirmReservation()">Confirmați</button>
+</mat-dialog-actions>

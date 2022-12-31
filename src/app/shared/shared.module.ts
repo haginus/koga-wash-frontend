@@ -18,6 +18,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SlotsLookupComponent } from './slots-lookup/slots-lookup.component';
+import { ReservationConfirmationDialogComponent } from './reservation-confirmation-dialog/reservation-confirmation-dialog.component';
 
 const materialDeps = [
   MatButtonModule,
@@ -35,11 +38,14 @@ const materialDeps = [
   MatListModule,
   MatSelectModule,
   MatDialogModule,
+  MatDatepickerModule,
 ]
 
 @NgModule({
   declarations: [
     LoadingComponent,
+    SlotsLookupComponent,
+    ReservationConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +60,7 @@ const materialDeps = [
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
+    SlotsLookupComponent,
   ],
   providers: []
 })

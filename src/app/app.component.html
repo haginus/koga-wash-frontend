@@ -3,13 +3,13 @@
 <mat-menu #userMenu="matMenu">
   <button mat-menu-item (click)="signOut()">
     <mat-icon>logout</mat-icon>
-    <span>Sign out</span>
+    <span>Deconectare</span>
   </button>
 </mat-menu>
 
 <div class="main-container" [hidden]="loading">
   <mat-toolbar *ngIf="!hideToolbar" class="app-toolbar">
-    <button mat-icon-button matTooltip="Toggle menu" *ngIf="!hideDrawer" (click)="drawer.toggle()">
+    <button mat-icon-button matTooltip="Comutați meniul" *ngIf="!hideDrawer" (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <span class="toolbar-title">{{ title }}</span>
@@ -32,17 +32,21 @@
           <mat-icon mat-list-icon>local_laundry_service</mat-icon>
           <div mat-line>Mașini</div>
         </a>
-        <div mat-subheader>Programări</div>
+        <div mat-subheader>Rezervări</div>
         <a mat-list-item routerLink="admin/reservations" routerLinkActive="active" class="nav-list-item">
           <mat-icon mat-list-icon>calendar_month</mat-icon>
-          <div mat-line>Programări</div>
+          <div mat-line>Rezervări</div>
+        </a>
+        <a mat-list-item routerLink="admin/slots-lookup" routerLinkActive="active" class="nav-list-item">
+          <mat-icon mat-list-icon>calendar_month</mat-icon>
+          <div mat-line>Rezervare nouă</div>
         </a>
       </mat-list>
       <mat-list *ngIf="user?.role == 'user'" class="nav-list">
-        <div mat-subheader>Courses</div>
-        <a mat-list-item routerLink="trainee/courses" routerLinkActive="active" class="nav-list-item">
-          <mat-icon mat-list-icon>school</mat-icon>
-          <div mat-line>Courses</div>
+        <div mat-subheader>Rezervări</div>
+        <a mat-list-item routerLink="user/courses" routerLinkActive="active" class="nav-list-item">
+          <mat-icon mat-list-icon>calendar_month</mat-icon>
+          <div mat-line>Rezervările mele</div>
         </a>
       </mat-list>
     </mat-drawer>

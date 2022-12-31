@@ -1,0 +1,41 @@
+:host {
+  display: block;
+  padding: 20px;
+}
+
+.lookup-card {
+  position: relative;
+
+  .loading-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.lookup-form {
+  padding-top: 20px;
+
+  .search-button {
+    border-radius: 20px;
+    padding: 4px 16px;
+  }
+}
+
+.results {
+  padding: 20px 0;
+}
+
+.slot-card {
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+  }
+
+  .available-slots-title {
+    margin-bottom: 8px;
+  }
+ 
+}

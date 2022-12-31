@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import '@angular/common/locales/global/ro';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,11 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FlexLayoutModule,
     SharedModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'ro-RO' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

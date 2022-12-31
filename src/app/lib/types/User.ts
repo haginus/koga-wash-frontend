@@ -1,6 +1,6 @@
 
 export interface User {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -8,4 +8,4 @@ export interface User {
   role: Role
 }
 
-type Role = 'admin' | 'user';
+export type Role = 'admin' | 'user' | 'system';
