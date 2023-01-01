@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from "@angular/material/table";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdminRoutingModule } from './admin-routing.module';
 import { UsersComponent } from './pages/users/users.component';
 import { SharedModule } from '../shared/shared.module';
@@ -10,11 +11,13 @@ import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component
 import { MachinesComponent } from './pages/machines/machines.component';
 import { MachineComponent } from './pages/machine/machine.component';
 import { ProgrammeDialogComponent } from './dialogs/programme-dialog/programme-dialog.component';
+import { InstanceDialogComponent } from './dialogs/instance-dialog/instance-dialog.component';
 
 
 const materialDeps = [
   MatTableModule,
   MatPaginatorModule,
+  MatSlideToggleModule,
 ]
 
 @NgModule({
@@ -24,6 +27,7 @@ const materialDeps = [
     MachinesComponent,
     MachineComponent,
     ProgrammeDialogComponent,
+    InstanceDialogComponent,
   ],
   imports: [
     ...materialDeps,

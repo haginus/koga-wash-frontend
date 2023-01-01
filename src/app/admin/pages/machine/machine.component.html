@@ -72,15 +72,17 @@
     <div class="machine-info-column" fxFlex="50" fxFlex.lt-md="100">
       <h2>Instanțe</h2>
       <mat-list>
-        <mat-list-item *ngFor="let instance of machine.instances">
+        <mat-list-item *ngFor="let instance of machine.instances" (click)="editInstance(instance)">
           <mat-icon mat-list-icon>local_laundry_service</mat-icon>
           <h4 mat-line>{{instance.name}}</h4>
           <p mat-line>{{ !instance.isFaulty ? 'Funcțională' : 'Nefuncțională' }}</p>
-          <p mat-line>8022116E8E7698E841D4FF58F1620CD21FD1B26C</p>
+          <p mat-line>
+            <span class="small">{{ instance.plugId }}</span>
+          </p>
         </mat-list-item>
       </mat-list>
       <div fxLayout="row" fxLayoutAlign="center center">
-        <button mat-stroked-button color="primary">
+        <button mat-stroked-button color="primary" (click)="addInstance()">
           <mat-icon>add</mat-icon>
           <span>Adăugați instanță</span>
         </button>

@@ -5,4 +5,5 @@ export interface MachineInstance {
   name: string;
   isFaulty: boolean;
   machine: Machine;
+  plugId: string;
 }

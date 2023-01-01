@@ -6,8 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { MACHINE_TYPES } from 'src/app/lib/constants';
 import { Machine } from 'src/app/lib/types/Machine';
+import { MachineInstance } from 'src/app/lib/types/MachineInstance';
 import { Programme } from 'src/app/lib/types/Programme';
 import { MachinesService } from 'src/app/services/machines.service';
+import { InstanceDialogComponent, InstanceDialogData } from '../../dialogs/instance-dialog/instance-dialog.component';
 import { ProgrammeDialogComponent, ProgrammeDialogData } from '../../dialogs/programme-dialog/programme-dialog.component';
 
 @Component({
@@ -121,6 +123,37 @@ export class MachineComponent implements OnInit {
         this.machine.programmes = this.machine.programmes.filter(p => p.id !== programme.id);
       } else {
         this.machine.programmes = this.machine.programmes.map(p => p.id === programmeResult.id ? programmeResult : p);
+      }
+    });
+  }
+
+  addInstance() {
+    const dialogRef = this.dialog.open<InstanceDialogComponent, InstanceDialogData>(InstanceDialogComponent, {
+      data: {
+        mode: "create",
+        machineId: this.machine.id,
+      }
+    });
+    dialogRef.afterClosed().subscribe((instance) => {
+      if(!instance) return;
+      this.machine.instances = [...this.machine.instances, instance];
+    });
+  }
+
+  editInstance(instance: MachineInstance) {
+    const dialogRef = this.dialog.open<InstanceDialogComponent, InstanceDialogData, MachineInstance | null | undefined>(InstanceDialogComponent, {
+      data: { 
+        mode: "edit",
+        instance,
+        machineId: this.machine.id,
+      }
+    });
+    dialogRef.afterClosed().subscribe((instanceResult) => {
+      if(instanceResult === undefined) return;
+      if(instanceResult === null) {
+        this.machine.instances = this.machine.instances.filter(p => p.id !== instance.id);
+      } else {
+        this.machine.instances = this.machine.instances.map(p => p.id === instanceResult.id ? instanceResult : p);
       }
     });
   }

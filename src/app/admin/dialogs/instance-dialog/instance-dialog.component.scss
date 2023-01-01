@@ -1,0 +1,21 @@
+mat-list {
+  margin-top: -16px;
+}
+
+.plug-header {
+  margin-bottom: -4px;
+}
+
+.plug-scroll {
+  position: relative;
+  height: 300px;
+  overflow: scroll;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0!important;
+  position: relative;
+  margin-bottom: 16px;
+
+  b {
+    font-weight: 500;
+  }
+}

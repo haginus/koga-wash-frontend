@@ -1,0 +1,48 @@
+<h2 mat-dialog-title *ngIf="data.mode == 'create'">Adăugați instanță</h2>
+<h2 mat-dialog-title *ngIf="data.mode == 'edit'">Editați instanță</h2>
+<app-loading *ngIf="isLoading" class="loading-container in-dialog"></app-loading>
+
+<mat-dialog-content>
+  <form [formGroup]="instanceForm" fxLayout="row grid" fxLayoutGap="10px grid">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Nume</mat-label>
+      <input matInput type="text" formControlName="name" name="instanceName">
+    </mat-form-field>
+    <mat-list fxFlex="100">
+      <mat-list-item class="no-padding">
+        <div mat-line>Nefuncțională</div>
+        <mat-slide-toggle formControlName="isFaulty"></mat-slide-toggle>
+      </mat-list-item>
+    </mat-list>
+    <h3 fxFlex="100" class="plug-header" fxLayout="row" fxLayoutAlign="center center">
+      <span fxFlex="100">Priză</span>
+      <button mat-icon-button (click)="loadPlugs()" [disabled]="isLoadingPlugs">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </h3>
+    <div class="plug-scroll" fxFlex="100">
+      <app-loading color="primary" *ngIf="isLoadingPlugs"></app-loading>
+      <mat-selection-list [multiple]="false" formControlName="plugId">
+        <mat-list-option *ngFor="let plug of plugs" [value]="plug.deviceId">
+          <h3 matLine>{{ plug.alias }}</h3>
+          <b matLine>{{ plug.deviceType }} - {{ plug.deviceModel }}</b>
+          <p matLine>Versiune firmware: {{ plug.fwVer }}</p>
+          <p matLine>ID: {{ plug.deviceId }}</p>
+          <p matLine>MAC: {{ formatMacAddress(plug.deviceMac) }}</p>
+        </mat-list-option>
+      </mat-selection-list>
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="plugs.length == 0 && !isLoadingPlugs">
+        <p class="muted">Nu există nicio priză.</p>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="deleteInstance()" color="warn" *ngIf="data.mode == 'edit'">Ștergeți</button>
+  <button mat-button mat-dialog-close>Închideți</button>
+  <button mat-button (click)="addInstance()" [disabled]="instanceForm.invalid"
+    *ngIf="data.mode == 'create'">Adăugați</button>
+  <button mat-button (click)="editInstance()" [disabled]="instanceForm.invalid"
+    *ngIf="data.mode == 'edit'">Salvați</button>
+</mat-dialog-actions>
