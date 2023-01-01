@@ -9,6 +9,7 @@ export interface Plug {
   deviceHwVer: number;
   alias: string;
   deviceMac: string;
+  deviceIp: string;
   oemId: string;
   deviceModel: string;
   hwId: string;

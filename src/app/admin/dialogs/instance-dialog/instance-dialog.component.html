@@ -29,6 +29,8 @@
           <p matLine>Versiune firmware: {{ plug.fwVer }}</p>
           <p matLine>ID: {{ plug.deviceId }}</p>
           <p matLine>MAC: {{ formatMacAddress(plug.deviceMac) }}</p>
+          <p matLine *ngIf="plug.deviceIp">IP: {{ plug.deviceIp }}</p>
+          <i matLine *ngIf="!plug.deviceIp">Offline</i>
         </mat-list-option>
       </mat-selection-list>
       <div fxLayout="row" fxLayoutAlign="center center" *ngIf="plugs.length == 0 && !isLoadingPlugs">
