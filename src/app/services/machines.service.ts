@@ -28,6 +28,20 @@ export class MachinesService {
     );
   }
 
+  create(machine: Omit<Machine, 'id'>): Observable<Machine> {
+    const url = `${environment.apiUrl}/machines/`;
+    return this.http.post<Machine>(url, machine, this.auth.getPrivateHeaders()).pipe(
+      catchError(this.handleError<Machine>('create'))
+    );
+  }
+
+  update(machine: Machine): Observable<Machine> {
+    const url = `${environment.apiUrl}/machines/${machine.id}`;
+    return this.http.put<Machine>(url, machine, this.auth.getPrivateHeaders()).pipe(
+      catchError(this.handleError<Machine>('update'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.snackbar.open(error?.error.message || 'Ceva nu a funcționat.');

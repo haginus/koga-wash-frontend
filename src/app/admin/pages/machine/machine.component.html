@@ -1,17 +1,19 @@
+<app-loading *ngIf="isLoading" class="loading-container"></app-loading>
 <mat-toolbar class="app-toolbar white">
   <button mat-icon-button (click)="goToList()">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <span class="toolbar-title">
-    {{machine.make}} {{machine.model}}
+  <span class="toolbar-title" *ngIf="!isLoading">
+    <span *ngIf="machine.id">{{machine.make}} {{machine.model}}</span>
+    <span *ngIf="!machine.id">Adăugați mașină</span>
   </span>
   <span class="toolbar-spacer"></span>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="editMahine()" *ngIf="!isEditing">
     <mat-icon>edit</mat-icon>
   </button>
 </mat-toolbar>
 <mat-card class="machine-info">
-  <mat-list>
+  <mat-list *ngIf="!isEditing">
     <mat-list-item>
       <mat-icon mat-list-icon>local_laundry_service</mat-icon>
       <h4 mat-line>Tip</h4>
@@ -28,7 +30,29 @@
       <p mat-line>{{machine.model}}</p>
     </mat-list-item>
   </mat-list>
-  <div fxLayout="row grid" class="machine-info-columns">
+  <form *ngIf="isEditing" [formGroup]="machineForm" fxLayout="row grid" fxLayoutGap="10px grid">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Tip</mat-label>
+      <mat-select formControlName="kind" name="machineKind">
+        <mat-option *ngFor="let machineKind of MACHINE_TYPES | keyvalue" [value]="machineKind.key">
+          {{ machineKind.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Producător</mat-label>
+      <input matInput type="text" formControlName="make" name="machineMake">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Model</mat-label>
+      <input matInput type="text" formControlName="model" name="machineModel">
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100" class="form-actions">
+      <button mat-stroked-button (click)="isEditing = false">Anulați</button>
+      <button mat-raised-button color="primary" (click)="saveMachine()">Salvați</button>
+    </div>
+  </form>
+  <div fxLayout="row grid" class="machine-info-columns" *ngIf="machine.id">
     <div class="machine-info-column" fxFlex="50" fxFlex.lt-md="100">
       <h2>Programe</h2>
       <mat-list>

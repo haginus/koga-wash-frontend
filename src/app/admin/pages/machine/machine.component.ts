@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { MACHINE_TYPES } from 'src/app/lib/constants';
@@ -20,20 +22,30 @@ export class MachineComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private machinesService: MachinesService,
+    private snackbar: MatSnackBar,
   ) { }
 
   machine: Machine = {
     id: undefined,
-    model: "Model",
     make: "Make",
+    model: "Model",
     kind: "WashingMachine",
+    programmes: [],
+    instances: [],
   }
 
-  performedActions: BehaviorSubject<string> = new BehaviorSubject('');
+  isLoading = true;
+  isEditing = false;
+  machineForm = new FormGroup({
+    make: new FormControl('', [Validators.required]),
+    model: new FormControl('', [Validators.required]),
+    kind: new FormControl('', [Validators.required]),
+  });
 
   MACHINE_TYPES = MACHINE_TYPES;
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.route.params.subscribe(params => {
       if(params.id) {
         this.machinesService.findOne(params.id).subscribe(machine => {
@@ -43,12 +55,43 @@ export class MachineComponent implements OnInit {
           }
           this.machine = machine;
         });
+      } else {
+        this.isEditing = true;
       }
+      this.isLoading = false;
     });
   }
 
   goToList() {
     this.router.navigate(["admin", "machines"]);
+  }
+
+  editMahine() {
+    this.isEditing = true;
+    this.machineForm.setValue({
+      make: this.machine.make,
+      model: this.machine.model,
+      kind: this.machine.kind,
+    });
+  }
+
+  saveMachine() {
+    const machine = {
+      ...this.machine,
+      ...this.machineForm.value,
+    };
+    const observable = this.machine.id ? this.machinesService.update(machine) : this.machinesService.create(machine);
+    observable.subscribe((machine) => {
+      if(!machine) {
+        return;
+      }
+      if(!this.machine.id) {
+        this.router.navigate(["admin", "machines", machine.id]);
+      }
+      this.machine = machine;
+      this.isEditing = false;
+      this.snackbar.open("Mașina a fost salvată.");
+    });
   }
 
   addProgramme() {
