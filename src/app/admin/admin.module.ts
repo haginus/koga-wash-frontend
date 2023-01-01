@@ -7,6 +7,9 @@ import { SharedModule } from '../shared/shared.module';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntlRo } from '../providers/mat-paginator-intl-ro';
 import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component';
+import { MachinesComponent } from './pages/machines/machines.component';
+import { MachineComponent } from './pages/machine/machine.component';
+import { ProgrammeDialogComponent } from './dialogs/programme-dialog/programme-dialog.component';
 
 
 const materialDeps = [
@@ -17,7 +20,10 @@ const materialDeps = [
 @NgModule({
   declarations: [
     UsersComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    MachinesComponent,
+    MachineComponent,
+    ProgrammeDialogComponent,
   ],
   imports: [
     ...materialDeps,

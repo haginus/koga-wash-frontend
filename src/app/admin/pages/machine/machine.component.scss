@@ -1,0 +1,40 @@
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.machine-info {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.machine-info-columns {
+  flex: 1;
+
+  .machine-info-column {
+    border-top: 1px solid #eee;
+    padding: 16px 0;
+    h2 {
+      margin-bottom: 0;
+      padding: 0 16px;
+    }
+    &:first-child {
+      border-right: 1px solid #eee;
+    }
+
+    mat-list {
+      margin-bottom: 8px;
+    }
+
+    mat-list-item:hover {
+      background: #eee;
+      cursor: pointer;
+    }
+  }
+}
+

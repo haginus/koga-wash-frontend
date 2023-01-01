@@ -94,6 +94,7 @@ app-loading.in-dialog {
     width: 0;
     background: transparent;
   }
+
   /* Firefox */
   scrollbar-width: thin;
   /* MS */
@@ -143,7 +144,8 @@ app-loading.in-dialog {
   table {
     width: 100%;
 
-    td, th {
+    td,
+    th {
       white-space: nowrap;
       min-width: fit-content;
     }
@@ -171,4 +173,40 @@ app-loading.in-dialog {
 
 .page-padding {
   padding: 16px;
+}
+
+mat-toolbar.white {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+
+.tip-card {
+  display: flex;
+  padding: 8px 16px;
+  min-height: 64px;
+  border-radius: 4px;
+  align-items: center;
+  background: #78909c;
+  box-sizing: border-box;
+
+  &.severe {
+    background: #e53935;
+  }
+
+  &.warning {
+    background: #ffc107e0;
+  }
+
+  &.success {
+    background: #4caf50;
+  }
+
+  .tip-icon {
+    margin-right: 16px;
+  }
+
+  .tip-card-content {
+    flex: 1;
+  }
 }

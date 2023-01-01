@@ -1,0 +1,66 @@
+<mat-toolbar class="app-toolbar white">
+  <button mat-icon-button (click)="goToList()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="toolbar-title">
+    {{machine.make}} {{machine.model}}
+  </span>
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button>
+    <mat-icon>edit</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-card class="machine-info">
+  <mat-list>
+    <mat-list-item>
+      <mat-icon mat-list-icon>local_laundry_service</mat-icon>
+      <h4 mat-line>Tip</h4>
+      <p mat-line>{{MACHINE_TYPES[machine.kind]}}</p>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>build</mat-icon>
+      <h4 mat-line>Producător</h4>
+      <p mat-line>{{machine.make}}</p>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>build</mat-icon>
+      <h4 mat-line>Model</h4>
+      <p mat-line>{{machine.model}}</p>
+    </mat-list-item>
+  </mat-list>
+  <div fxLayout="row grid" class="machine-info-columns">
+    <div class="machine-info-column" fxFlex="50" fxFlex.lt-md="100">
+      <h2>Programe</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let programme of machine.programmes" (click)="editProgramme(programme)">
+          <mat-icon mat-list-icon>schedule</mat-icon>
+          <h4 mat-line>{{programme.name}}</h4>
+          <p mat-line>{{programme.description}}</p>
+        </mat-list-item>
+      </mat-list>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-stroked-button color="primary" (click)="addProgramme()">
+          <mat-icon>add</mat-icon>
+          <span>Adăugați program</span>
+        </button>
+      </div>
+    </div>
+    <div class="machine-info-column" fxFlex="50" fxFlex.lt-md="100">
+      <h2>Instanțe</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let instance of machine.instances">
+          <mat-icon mat-list-icon>local_laundry_service</mat-icon>
+          <h4 mat-line>{{instance.name}}</h4>
+          <p mat-line>{{ !instance.isFaulty ? 'Funcțională' : 'Nefuncțională' }}</p>
+          <p mat-line>8022116E8E7698E841D4FF58F1620CD21FD1B26C</p>
+        </mat-list-item>
+      </mat-list>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-stroked-button color="primary">
+          <mat-icon>add</mat-icon>
+          <span>Adăugați instanță</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>
