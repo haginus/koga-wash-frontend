@@ -12,6 +12,7 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
 import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ro-RO' },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 4000 } },
   ],
   bootstrap: [AppComponent]
 })

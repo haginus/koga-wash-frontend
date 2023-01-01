@@ -5,7 +5,8 @@ export interface User {
   lastName: string;
   email: string;
   phone: string;
-  role: Role
+  room: string;
+  role: Role;
 }
 
 export type Role = 'admin' | 'user' | 'system';

@@ -1,6 +1,17 @@
-html, body, app-root { height: 100%; }
-app-root { display: block; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body,
+app-root {
+  height: 100%;
+}
+
+app-root {
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .page-expand {
   width: 100%;
@@ -8,13 +19,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 mat-icon {
-  font-family: 'Material Icons Outlined'!important;
+  font-family: 'Material Icons Outlined' !important;
 }
 
 .app-toolbar {
   .toolbar-title {
     padding-left: 8px;
   }
+
   .toolbar-spacer {
     flex: 1;
   }
@@ -22,21 +34,26 @@ mat-icon {
 
 .nav-list {
   .nav-list-item {
-    height: 48px!important;
+    height: 48px !important;
     cursor: pointer;
     text-decoration: none;
+
     mat-icon {
       color: #424242;
     }
+
     .mat-list-text {
       color: #616161;
-      padding-left: 8px!important;
+      padding-left: 8px !important;
     }
+
     :hover {
       background: #eeeeee;
     }
+
     &.active {
       background: #f5f5f5;
+
       .mat-list-text {
         color: #3f51b5;
       }
@@ -46,7 +63,7 @@ mat-icon {
 
 mat-list-item.no-padding {
   .mat-list-item-content {
-    padding: 0!important;
+    padding: 0 !important;
   }
 }
 
@@ -58,11 +75,100 @@ button.left-icon {
   mat-icon {
     margin-left: -4px;
   }
-  mat-icon + span {
+
+  mat-icon+span {
     margin-left: 8px;
   }
 }
 
 app-loading.in-dialog {
   margin: -24px;
+}
+
+.discrete-scroll {
+  overflow: auto;
+
+  /* Webkit */
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    background: transparent;
+  }
+  /* Firefox */
+  scrollbar-width: thin;
+  /* MS */
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.table-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+
+  .loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  .table-filters {
+    padding: 16px;
+    padding-bottom: 0;
+
+    .filter-header {
+      display: flex;
+      align-items: center;
+      padding-bottom: 12px;
+
+      .text {
+        color: rgba(0, 0, 0, 0.54);
+        font-weight: 500;
+        flex: 1;
+      }
+
+    }
+  }
+
+  table {
+    width: 100%;
+
+    td, th {
+      white-space: nowrap;
+      min-width: fit-content;
+    }
+
+    td.wrap {
+      white-space: normal;
+    }
+
+    td:not(:last-child),
+    th:not(:last-child) {
+      padding-right: 8px;
+    }
+
+    .mat-column-status,
+    .mat-column-select {
+      width: 24px;
+      padding: 0 12px !important;
+    }
+
+    .mat-column-expandedDetail {
+      white-space: normal;
+    }
+  }
+}
+
+.page-padding {
+  padding: 16px;
 }
