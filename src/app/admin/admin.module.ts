@@ -12,6 +12,7 @@ import { MachinesComponent } from './pages/machines/machines.component';
 import { MachineComponent } from './pages/machine/machine.component';
 import { ProgrammeDialogComponent } from './dialogs/programme-dialog/programme-dialog.component';
 import { InstanceDialogComponent } from './dialogs/instance-dialog/instance-dialog.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
 
 
 const materialDeps = [
@@ -28,6 +29,7 @@ const materialDeps = [
     MachineComponent,
     ProgrammeDialogComponent,
     InstanceDialogComponent,
+    ReservationsComponent,
   ],
   imports: [
     ...materialDeps,

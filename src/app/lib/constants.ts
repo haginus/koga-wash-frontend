@@ -1,4 +1,5 @@
 import { MaterialKind } from "./types/Programme"
+import { ReservationStatus } from "./types/Reservation"
 
 export const MACHINE_TYPES = {
   "WashingMachine": "Mașină de spălat",
@@ -13,4 +14,12 @@ export const PROGRAMME_MATERIAL_KINDS: Record<MaterialKind, string> = {
   [MaterialKind.RAYON]: "Raiun",
   [MaterialKind.LINEN]: "Lână",
   [MaterialKind.MIXED]: "Mixt",
+}
+
+export const RESERVATION_STATUS: Record<ReservationStatus, string> = {
+  [ReservationStatus.PENDING]: "În așteptare",
+  [ReservationStatus.CHECKED_IN]: "Începută",
+  [ReservationStatus.FINISHED]: "Finalizată",
+  [ReservationStatus.CANCELLED]: "Anulată",
+  [ReservationStatus.NOT_HONORED]: "Neonorată",
 }
