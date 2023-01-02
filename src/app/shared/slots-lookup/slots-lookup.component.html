@@ -10,7 +10,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="outline" fxFlex="50" fxFlex.lt-md="100">
+    <mat-form-field appearance="outline" fxFlex="50" fxFlex.lt-md="100">
       <mat-label>Începând cu...</mat-label>
       <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="since" autocomplete="off">
       <mat-hint>DD.MM.YYYY</mat-hint>
@@ -28,8 +28,8 @@
 </mat-card>
 
 <div class="results" fxLayout="row grid" fxLayoutGap="10px grid">
-  <div fxFlex="33" fxFlex.lt-md="50" fxFlex.lt-sm="100">
-    <mat-card *ngFor="let availableSlot of narrowedAvailableSlots" class="slot-card">
+  <div fxFlex="33" fxFlex.lt-lg="50" fxFlex.lt-sm="100" *ngFor="let availableSlot of narrowedAvailableSlots"> 
+    <mat-card class="slot-card">
       <mat-card-header>
         <div mat-card-avatar class="avatar">
           <mat-icon>local_laundry_service</mat-icon>
@@ -40,13 +40,13 @@
       <mat-card-content>
         <div class="available-slots-title">Sloturi disponibile</div>
         <div fxLayout="row grid" fxLayoutGap="4px grid">
-          <div *ngFor="let slot of availableSlot.slots">
+          <div *ngFor="let slot of availableSlot.slots" fxFlex="33" fxFlex.lt-lg="50">
             <button mat-stroked-button class="slot" (click)="selectSlot(availableSlot.instance, slot)">
               {{ slot | date: 'd MMM, HH:mm' }}
             </button>
           </div>
-          <div *ngIf="availableSlot.slots.length != availableSlot.allSlots.length">
-            <button mat-stroked-button (click)="expandSlots(availableSlot)">
+          <div *ngIf="availableSlot.slots.length != availableSlot.allSlots.length" fxFlex="33" fxFlex.lt-lg="50">
+            <button mat-stroked-button (click)="expandSlots(availableSlot)" class="slot">
               + încă {{ availableSlot.allSlots.length - availableSlot.slots.length }}
             </button>
           </div>
