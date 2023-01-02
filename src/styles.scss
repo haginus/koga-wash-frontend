@@ -222,3 +222,17 @@ mat-toolbar.white {
 .muted {
   color: rgba(0, 0, 0, 0.6);
 }
+
+.link {
+  color: #3f51b5;
+  cursor: pointer;
+  display: inline-flex!important;
+  align-items: center;
+  text-decoration: none;
+  mat-icon {
+    margin-left: 4px;
+    font-size: 16px!important;
+    width: 16px!important;
+    height: 16px!important;
+  }
+}

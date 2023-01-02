@@ -1,0 +1,16 @@
+mat-list.choose-action {
+  mat-list-item:hover {
+    cursor: pointer;
+    background: #eeeeee;
+  }
+}
+
+.reservation-snippet {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  padding: 8px;
+
+  h3 {
+    margin-bottom: -8px;
+  }
+}

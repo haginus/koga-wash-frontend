@@ -32,7 +32,8 @@
           <p matLine>{{ RESERVATION_STATUS[reservation.status] }}</p>
         </mat-list-item>
         <ng-container *ngIf="user.role == 'admin' && hasMeta">
-          <div mat-subheader>Meta</div>
+          <mat-divider></mat-divider>
+          <div mat-subheader>Date suplimentare</div>
           <mat-list-item *ngIf="reservation.meta.checkedInAt">
             <h4 matLine>Dată check-in</h4>
             <p matLine>{{ reservation.meta.checkedInAt | date: 'd MMM yyyy, HH:mm' }}</p>

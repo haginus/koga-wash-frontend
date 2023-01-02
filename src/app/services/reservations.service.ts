@@ -69,6 +69,13 @@ export class ReservationsService {
     );
   }
 
+  findPreviousReservation(reservationId: string, flag = false): Observable<Reservation> {
+    const url = `${environment.apiUrl}/reservations/${reservationId}/previous?flag=${flag}`;
+    return this.http.get<Reservation>(url, this.auth.getPrivateHeaders()).pipe(
+      catchError(this.handleError<Reservation>('findPreviousReservation'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.snackbar.open(error?.error.message || 'Ceva nu a funcționat.');

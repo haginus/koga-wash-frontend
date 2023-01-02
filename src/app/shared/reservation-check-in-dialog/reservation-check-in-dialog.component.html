@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Faceți check-in</h2>
+
+<mat-dialog-content>
+  <p>Asigurați-vă că puteți folosi mașina.</p>
+  <mat-list class="choose-action no-padding">
+    <mat-list-item (click)="checkIn()">
+      <h4 matLine>Începeți rezervarea</h4>
+      <mat-icon *ngIf="!isCheckingIn">arrow_forward</mat-icon>
+      <mat-spinner *ngIf="isCheckingIn" diameter="24"></mat-spinner>
+    </mat-list-item>
+    <mat-list-item (click)="getPreviousReservation()">
+      <h4 matLine>Există haine în mașină</h4>
+      <mat-icon *ngIf="!isLoadingPreviousReservation">arrow_forward</mat-icon>
+      <mat-spinner *ngIf="isLoadingPreviousReservation" diameter="24"></mat-spinner>
+    </mat-list-item>
+  </mat-list>
+  <mat-card class="reservation-snippet" *ngIf="previousReservation">
+    <h3>Rezervarea anterioară</h3>
+    <mat-list class="no-padding">
+      <mat-list-item>
+        <mat-icon mat-list-icon>access_time</mat-icon>
+        <h4 matLine>Dată de sfârșit</h4>
+        <p matLine>{{ previousReservation.endTime | date: 'd MMM yyyy, HH:mm' }}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h4 matLine>Nume utilizator</h4>
+        <p matLine> {{ previousReservation.user.firstName }} {{ previousReservation.user.lastName }} </p>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>sensor_door</mat-icon>
+        <h4 matLine>Camera</h4>
+        <p matLine> {{ previousReservation.user.room }} </p>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>phone</mat-icon>
+        <h4 matLine>Telefon</h4>
+        <a matLine class="link" href="tel:{{previousReservation.user.phone}}">
+          <span>{{ previousReservation.user.phone }}</span>
+          <mat-icon>open_in_new</mat-icon>
+        </a>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</mat-dialog-content>
+

@@ -29,3 +29,5 @@ export const RESERVATION_STATUS: Record<ReservationStatus, string> = {
   [ReservationStatus.CANCELLED]: "Anulată",
   [ReservationStatus.NOT_HONORED]: "Neonorată",
 }
+
+export const isMobile = window.innerWidth <= 768;
