@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SlotsLookupComponent } from './slots-lookup/slots-lookup.component';
 import { ReservationConfirmationDialogComponent } from './reservation-confirmation-dialog/reservation-confirmation-dialog.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 const materialDeps = [
   MatButtonModule,
@@ -46,6 +47,7 @@ const materialDeps = [
     LoadingComponent,
     SlotsLookupComponent,
     ReservationConfirmationDialogComponent,
+    ReservationComponent,
   ],
   imports: [
     CommonModule,

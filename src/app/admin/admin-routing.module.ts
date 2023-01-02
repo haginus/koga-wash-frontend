@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReservationComponent } from '../shared/reservation/reservation.component';
 import { SlotsLookupComponent } from '../shared/slots-lookup/slots-lookup.component';
 import { MachineComponent } from './pages/machine/machine.component';
 import { MachinesComponent } from './pages/machines/machines.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'machines/create', component: MachineComponent, data: { title: 'Mașini' } },
   { path: 'machines/:id', component: MachineComponent, data: { title: 'Mașini' } },
   { path: 'reservations', component: ReservationsComponent, data: { title: 'Rezervări' }, },
+  { path: 'reservations/:id', component: ReservationComponent, data: { title: 'Rezervări' } },
   { path: 'slots-lookup', component: SlotsLookupComponent, data: { title: 'Rezervare' }, },
   { path: '**', redirectTo: "users" },
 ];

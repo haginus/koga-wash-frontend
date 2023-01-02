@@ -1,5 +1,11 @@
-import { MaterialKind } from "./types/Programme"
-import { ReservationStatus } from "./types/Reservation"
+import { MaterialKind } from "./types/Programme";
+import { ReservationStatus } from "./types/Reservation";
+
+export const USER_ROLES = {
+  "admin": "Administrator",
+  "user": "Utilizator",
+  "system": "Sistem",
+}
 
 export const MACHINE_TYPES = {
   "WashingMachine": "Mașină de spălat",

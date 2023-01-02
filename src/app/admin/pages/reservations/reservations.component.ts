@@ -56,6 +56,7 @@ export class ReservationsComponent implements AfterViewInit {
   }
 
   viewReservation(reservation: ReservationTableEntry) {
+    this.router.navigate(['admin', 'reservations', reservation.id]);
   }
 
   checkInReservation(reservationEntry: ReservationTableEntry) {

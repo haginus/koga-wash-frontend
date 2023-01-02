@@ -61,6 +61,10 @@ mat-icon {
   }
 }
 
+mat-list.no-padding {
+  margin: 0 -16px;
+}
+
 mat-list-item.no-padding {
   .mat-list-item-content {
     padding: 0 !important;

@@ -1,0 +1,80 @@
+<app-loading *ngIf="isLoading" class="loading-container"></app-loading>
+<div *ngIf="reservation">
+  <mat-card class="reservation-card">
+    <mat-toolbar class="app-toolbar white">
+      <button mat-icon-button (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </mat-toolbar>
+    <div class="reservation-info">
+      <h1>Rezervare la {{ reservation.machineInstance.name }}</h1>
+      <div class="muted"> {{ RESERVATION_STATUS[reservation.status] }} </div>
+    </div>
+    <div class="reservation-actions">
+      <button *ngIf="canCheckIn" mat-stroked-button (click)="checkIn()">Check-in</button>
+      <button *ngIf="canCancel" mat-stroked-button color="warn" (click)="cancel()">Anulați</button>
+    </div>
+  </mat-card>
+  <div class="details">
+    <mat-card class="detail-card">
+      <mat-card-title>Detailii rezervare</mat-card-title>
+      <mat-list class="no-padding">
+        <mat-list-item>
+          <h4 matLine>Dată început</h4>
+          <p matLine>{{ reservation.startTime | date: 'd MMM yyyy, HH:mm' }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <h4 matLine>Dată sfârșit</h4>
+          <p matLine>{{ reservation.endTime | date: 'd MMM yyyy, HH:mm' }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <h4 matLine>Status</h4>
+          <p matLine>{{ RESERVATION_STATUS[reservation.status] }}</p>
+        </mat-list-item>
+        <ng-container *ngIf="user.role == 'admin' && hasMeta">
+          <div mat-subheader>Meta</div>
+          <mat-list-item *ngIf="reservation.meta.checkedInAt">
+            <h4 matLine>Dată check-in</h4>
+            <p matLine>{{ reservation.meta.checkedInAt | date: 'd MMM yyyy, HH:mm' }}</p>
+          </mat-list-item>
+          <mat-list-item *ngIf="reservation.meta.checkedOutAt">
+            <h4 matLine>Dată check-out</h4>
+            <p matLine>{{ reservation.meta.checkedOutAt | date: 'd MMM yyyy, HH:mm' }}</p>
+          </mat-list-item>
+          <mat-list-item *ngIf="reservation.meta.cancelledAt">
+            <h4 matLine>Dată anulare</h4>
+            <p matLine>{{ reservation.meta.cancelledAt | date: 'd MMM yyyy, HH:mm' }}</p>
+          </mat-list-item>
+          <mat-list-item *ngIf="reservation.meta.cancelledBy">
+            <h4 matLine>Anulat de</h4>
+            <p matLine>{{ USER_ROLES[reservation.meta.cancelledBy] }}</p>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </mat-card>
+    <mat-card class="detail-card">
+      <mat-card-title>Detailii mașină</mat-card-title>
+      <mat-list>
+        <mat-list-item class="no-padding">
+          <h4 matLine>Mașină</h4>
+          <p matLine>{{ reservation.machineInstance.name }}</p>
+          <p matLine>{{ MACHINE_TYPES[reservation.machineInstance.machine.kind] }}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card class="detail-card">
+      <mat-card-title>Detailii program</mat-card-title>
+      <mat-list>
+        <mat-list-item class="no-padding">
+          <h4 matLine>Program</h4>
+          <p matLine>{{ reservation.programme.name }}</p>
+          <p matLine>{{ reservation.programme.description}}</p>
+        </mat-list-item>
+        <mat-list-item class="no-padding">
+          <h4 matLine>Durată</h4>
+          <p matLine>{{ reservation.programme.duration }} min.</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+</div>

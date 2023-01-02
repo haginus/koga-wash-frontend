@@ -24,6 +24,13 @@ export class ReservationsService {
     );
   }
 
+  findOne(reservationId: string): Observable<Reservation> {
+    const url = `${environment.apiUrl}/reservations/${reservationId}`;
+    return this.http.get<Reservation>(url, this.auth.getPrivateHeaders()).pipe(
+      catchError(this.handleError<Reservation>('findOne'))
+    );
+  }
+
   findAvailableSlots(programmeId: string, since?: Date): Observable<AvailableSlots[]> {
     let url = `${environment.apiUrl}/reservations/available-slots/programme/${programmeId}`;
     if (since) {
