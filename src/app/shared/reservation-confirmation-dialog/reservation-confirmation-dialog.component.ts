@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { MachineInstance } from 'src/app/lib/types/MachineInstance';
 import { Programme } from 'src/app/lib/types/Programme';
 import { User } from 'src/app/lib/types/User';
@@ -20,6 +21,7 @@ export class ReservationConfirmationDialogComponent implements OnInit {
     private snackbar: MatSnackBar,
     private reservationService: ReservationsService,
     private authService: AuthService,
+    private router: Router,
   ) { }
 
   user!: User;
@@ -53,9 +55,23 @@ export class ReservationConfirmationDialogComponent implements OnInit {
         this.isLoading = false;
         return;
       }
-      this.snackbar.open('Rezervarea a fost efectuată cu succes!');
+      if(this.data.instance.machine.kind == 'WashingMachine') {
+        const sbRef = this.snackbar.open('Rezervarea a fost efectuată cu succes!', 'Programare uscător', {
+          duration: 10000,
+        });
+        sbRef.onAction().subscribe(() => {
+          this.router.navigate([this.user.role, 'slots-lookup'], { 
+            queryParams: { 
+              since: reservation.endTime,
+              type: 'Dryer',
+            } 
+          });
+        });
+      } else {
+        this.snackbar.open('Rezervarea a fost efectuată cu succes!');
+      }
       this.dialogRef.close();
-      // TODO: redirect to reservation details
+      this.router.navigate([this.user.role, 'reservations', reservation.id]);
       sub.unsubscribe();
     });
   }
