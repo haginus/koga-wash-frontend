@@ -21,6 +21,11 @@ const routes: Routes = [
     canActivate: [SignedInGuard, RoleGuard],
     data: { role: 'admin' }
   },
+  { path: 'user',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    canActivate: [SignedInGuard, RoleGuard],
+    data: { role: 'user' }
+  },
   { path: '**', redirectTo: '', canActivate: [SignedInGuard, RoleGuard] },
 ];
 

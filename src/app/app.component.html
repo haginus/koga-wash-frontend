@@ -44,9 +44,13 @@
       </mat-list>
       <mat-list *ngIf="user?.role == 'user'" class="nav-list">
         <div mat-subheader>Rezervări</div>
-        <a mat-list-item routerLink="user/courses" routerLinkActive="active" class="nav-list-item">
+        <a mat-list-item routerLink="user/reservations" routerLinkActive="active" class="nav-list-item">
           <mat-icon mat-list-icon>calendar_month</mat-icon>
           <div mat-line>Rezervările mele</div>
+        </a>
+        <a mat-list-item routerLink="user/slots-lookup" routerLinkActive="active" class="nav-list-item">
+          <mat-icon mat-list-icon>calendar_month</mat-icon>
+          <div mat-line>Rezervare nouă</div>
         </a>
       </mat-list>
     </mat-drawer>
