@@ -26,4 +26,13 @@ interface ReservationMeta {
   checkedOutAt?: Date;
   cancelledAt?: Date;
   cancelledBy?: Role;
+  flags: ReservationMetaFlag[];
 }
+
+interface ReservationMetaFlag {
+  flaggedAt: Date;
+  flaggedByUserId: string;
+  flagReason: FlagReason;
+}
+
+type FlagReason = 'clothes_left_behind';

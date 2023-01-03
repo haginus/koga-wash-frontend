@@ -50,6 +50,18 @@
             <h4 matLine>Anulat de</h4>
             <p matLine>{{ USER_ROLES[reservation.meta.cancelledBy] }}</p>
           </mat-list-item>
+          <ng-container *ngIf="reservation.meta.flags?.length">
+            <mat-divider></mat-divider>
+            <div mat-subheader>Semnalizări</div>
+            <mat-list>
+              <mat-list-item *ngFor="let flag of reservation.meta.flags">
+                <mat-icon matListIcon>flag</mat-icon>
+                <h4 matLine>{{ FLAG_REASONS[flag.flagReason] }}</h4>
+                <p matLine>Raportat la {{ flag.flaggedAt | date: 'd MMM yyyy, HH:mm' }}</p>
+
+              </mat-list-item>
+            </mat-list>
+          </ng-container>
         </ng-container>
       </mat-list>
     </mat-card>

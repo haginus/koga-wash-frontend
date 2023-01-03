@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { RESERVATION_STATUS, MACHINE_TYPES, USER_ROLES, isMobile } from 'src/app/lib/constants';
+import { RESERVATION_STATUS, MACHINE_TYPES, USER_ROLES, isMobile, FLAG_REASONS } from 'src/app/lib/constants';
 import { Reservation, ReservationStatus } from 'src/app/lib/types/Reservation';
 import { User } from 'src/app/lib/types/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -31,6 +31,7 @@ export class ReservationComponent implements OnInit {
   RESERVATION_STATUS = RESERVATION_STATUS;
   MACHINE_TYPES = MACHINE_TYPES;
   USER_ROLES = USER_ROLES;
+  FLAG_REASONS = FLAG_REASONS;
 
   get startTime() {
     return new Date(this.reservation?.startTime);
@@ -46,7 +47,8 @@ export class ReservationComponent implements OnInit {
   }
 
   get hasMeta() {
-    return this.reservation?.meta !== undefined && Object.keys(this.reservation.meta).length > 0;
+    return this.reservation?.meta !== undefined && Object.keys(this.reservation.meta).length > 0 &&
+      (this.reservation.meta.flags ? this.reservation.meta.flags.length > 0 : true);
   }
 
   ngOnInit(): void {

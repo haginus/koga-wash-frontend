@@ -30,4 +30,8 @@ export const RESERVATION_STATUS: Record<ReservationStatus, string> = {
   [ReservationStatus.NOT_HONORED]: "Neonorată",
 }
 
+export const FLAG_REASONS = {
+  "clothes_left_behind": "Haine lăsate în mașină",
+}
+
 export const isMobile = window.innerWidth <= 768;
