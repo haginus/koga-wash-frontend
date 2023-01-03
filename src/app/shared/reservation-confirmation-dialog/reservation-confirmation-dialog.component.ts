@@ -63,7 +63,7 @@ export class ReservationConfirmationDialogComponent implements OnInit {
           this.router.navigate([this.user.role, 'slots-lookup'], { 
             queryParams: { 
               since: reservation.endTime,
-              type: 'Dryer',
+              machineKind: 'DryerMachine',
             } 
           });
         });

@@ -3,20 +3,38 @@
   <mat-card-title>Găsiți un loc liber</mat-card-title>
   <form class="lookup-form" [formGroup]="lookupForm" fxLayout="row grid" fxLayoutGap="10px grid" (ngSubmit)="searchSlots()">
     <mat-form-field appearance="outline" fxFlex="50" fxFlex.lt-md="100">
-      <mat-label>Program</mat-label>
-      <mat-select formControlName="programme">
-        <mat-option *ngFor="let programme of programmes$ | async" [value]="programme">
-          {{ programme.name }}
+      <mat-label>Tip</mat-label>
+      <mat-select formControlName="machineKind">
+        <mat-option *ngFor="let machineType of MACHINE_TYPES | keyvalue" [value]="machineType.key">
+          {{ machineType.value }}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" fxFlex.lt-md="100">
-      <mat-label>Începând cu...</mat-label>
-      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="since" autocomplete="off">
-      <mat-hint>DD.MM.YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker></mat-datepicker>
+      <mat-label>Program</mat-label>
+      <mat-select formControlName="programme">
+        <mat-option *ngFor="let programme of filteredProgrammes" [value]="programme">
+          {{ programme.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
+    <div fxFlex="50" fxFlex.lt-md="100" fxLayout="row grid" fxLayoutGap="10px grid">
+      <mat-form-field appearance="outline" fxFlex="65">
+        <mat-label>Începând cu...</mat-label>
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="since" autocomplete="off">
+        <mat-hint>DD.MM.YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex="35">
+        <mat-label>Ora</mat-label>
+        <mat-select formControlName="since" [compareWith]="dateEquals">
+          <mat-option *ngFor="let timeStep of timeSteps" [value]="timeStep">
+            {{ timeStep | date: 'HH:mm' }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
       <button mat-raised-button color="primary" class="search-button left-icon" type="submit" [disabled]="lookupForm.invalid || isLoading">
         <mat-icon>search</mat-icon>

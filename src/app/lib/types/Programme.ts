@@ -1,3 +1,5 @@
+import { Machine } from "./Machine";
+
 export interface Programme {
   id: string;
   name: string;
@@ -5,6 +7,7 @@ export interface Programme {
   description: string;
   duration: number;
   materialKind: MaterialKind;
+  machine: Machine;
 }
 
 export enum MaterialKind {
