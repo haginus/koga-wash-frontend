@@ -1,0 +1,17 @@
+<a class="reservation-snippet" [routerLink]="['/user/reservations', reservation.id]">
+  <mat-card>
+    <div class="instance-hero">
+      <mat-icon class="instance-icon">local_laundry_service</mat-icon>
+    </div>
+    <div class="reservation-details">
+      <h2>Rezervare la {{ reservation.machineInstance.name }}</h2>
+      <div class="muted"> {{ RESERVATION_STATUS[reservation.status] }} </div>
+      <div class="muted">
+        {{reservation.startTime | date: 'd MMM y, HH:mm' }} - {{reservation.endTime | date: 'd MMM y, HH:mm' }}
+      </div>
+      <div class="muted">
+        {{ reservation.programme.name }}
+      </div>
+    </div>
+  </mat-card>
+</a>

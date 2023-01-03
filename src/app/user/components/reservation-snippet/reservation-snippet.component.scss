@@ -1,0 +1,44 @@
+.reservation-snippet {
+  margin: 0 auto;
+  margin-bottom: 16px;
+  display: block;
+  max-width: 600px;
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+
+  mat-card {
+    padding: 0;
+    display: flex;
+
+    .instance-hero {
+      width: 25%;
+      padding-bottom: 25%;
+      background: #eee;
+      position: relative;
+
+      .instance-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(10vw, 80px);
+        height: min(10vw, 80px);
+        font-size: min(10vw, 80px);
+      }
+    }
+
+    .reservation-details {
+      flex: 1;
+      padding: 12px;
+
+      h2 {
+        margin-bottom: 8px;
+      }
+
+      .muted + .muted {
+        margin-top: 4px;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.mat-tab-group {
+  height: 100%;
+}
+
+.tab-padding {
+  padding: 16px;
+}
+
+.new-reservation-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.no-reservations {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.8);
+
+  mat-icon {
+    margin-right: 8px;
+    fill: inherit;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}

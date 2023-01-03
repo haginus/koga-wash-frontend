@@ -1,0 +1,23 @@
+<mat-tab-group mat-stretch-tabs="true">
+  <mat-tab label="Rezervări curente">
+    <div class="tab-padding">
+      <div class="new-reservation-container">
+        <button mat-stroked-button color="primary" (click)="goToLookup()">Rezervare nouă</button>
+      </div>
+      <app-reservation-snippet *ngFor="let reservation of upcomingReservations" [reservation]="reservation"></app-reservation-snippet>
+      <div *ngIf="upcomingReservations.length == 0" class="no-reservations">
+        <mat-icon>calendar_today</mat-icon>
+        <span>Nu există rezervări curente.</span>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Rezervări trecute">
+    <div class="tab-padding">
+      <app-reservation-snippet *ngFor="let reservation of pastReservations" [reservation]="reservation"></app-reservation-snippet>
+      <div *ngIf="pastReservations.length == 0" class="no-reservations">
+        <mat-icon>calendar_today</mat-icon>
+        <span>Nu există rezervări în trecut.</span>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
