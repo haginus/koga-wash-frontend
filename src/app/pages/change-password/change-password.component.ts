@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,9 +21,9 @@ export class ChangePasswordComponent implements OnInit {
   token: string;
 
   changePasswordForm = new FormGroup({
-    "currentPassword": new FormControl(null, [Validators.minLength(6)]),
-    "password": new FormControl(null, [Validators.required, Validators.minLength(6)]),
-    "confirmPassword": new FormControl(null, [Validators.required, Validators.minLength(6)]),
+    "currentPassword": new FormControl(null, [Validators.minLength(8)]),
+    "password": new FormControl(null, [Validators.required, Validators.minLength(8)]),
+    "confirmPassword": new FormControl(null, [Validators.required, Validators.minLength(8)]),
   }, { validators: ChangePasswordComponent.foreignKeyValidator })
 
   matcher = new MyErrorStateMatcher();

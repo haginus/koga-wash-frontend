@@ -72,7 +72,7 @@ export class AuthService {
     const url = `${environment.apiUrl}/auth/token/change-password`;
     return this.http.post<AuthResponse>(url, { token, password }).pipe(
       map(res => {
-        this.setToken((res as any).token);
+        this.setToken((res as any).access_token);
         this.userDataSource.next((res as any).user);
         return res
       }),
