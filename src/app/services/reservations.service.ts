@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AvailableSlots } from '../lib/types/AvailableSlots';
+import { AvailableInstancesDto } from '../lib/types/dto/available-instances.dto';
 import { CreateReservationDto } from '../lib/types/dto/create-reservation.dto';
 import { Paginated } from '../lib/types/Paginated';
 import { PaginatedQuery } from '../lib/types/PaginatedQuery';
@@ -73,6 +74,13 @@ export class ReservationsService {
     const url = `${environment.apiUrl}/reservations/${reservationId}/previous?flag=${flag}`;
     return this.http.get<Reservation>(url, this.auth.getPrivateHeaders()).pipe(
       catchError(this.handleError<Reservation>('findPreviousReservation'))
+    );
+  }
+
+  findAvailableInstances(): Observable<AvailableInstancesDto[]> {
+    const url = `${environment.apiUrl}/reservations/instances`;
+    return this.http.get<AvailableInstancesDto[]>(url, this.auth.getPrivateHeaders()).pipe(
+      catchError(this.handleError<AvailableInstancesDto[]>('findAvailableInstances', []))
     );
   }
 

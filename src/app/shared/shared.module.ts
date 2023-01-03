@@ -23,6 +23,7 @@ import { SlotsLookupComponent } from './slots-lookup/slots-lookup.component';
 import { ReservationConfirmationDialogComponent } from './reservation-confirmation-dialog/reservation-confirmation-dialog.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationCheckInDialogComponent } from './reservation-check-in-dialog/reservation-check-in-dialog.component';
+import { AvailableInstancesComponent } from './available-instances/available-instances.component';
 
 const materialDeps = [
   MatButtonModule,
@@ -50,6 +51,7 @@ const materialDeps = [
     ReservationConfirmationDialogComponent,
     ReservationComponent,
     ReservationCheckInDialogComponent,
+    AvailableInstancesComponent,
   ],
   imports: [
     CommonModule,

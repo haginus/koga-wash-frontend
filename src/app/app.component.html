@@ -41,8 +41,17 @@
           <mat-icon mat-list-icon>calendar_month</mat-icon>
           <div mat-line>Rezervare nouă</div>
         </a>
+        <a mat-list-item routerLink="admin/machine-status" routerLinkActive="active" class="nav-list-item">
+          <mat-icon mat-list-icon>local_laundry_service</mat-icon>
+          <div mat-line>Stare curentă mașini</div>
+        </a>
       </mat-list>
       <mat-list *ngIf="user?.role == 'user'" class="nav-list">
+        <div mat-subheader>Stare curentă</div>
+        <a mat-list-item routerLink="user/machine-status" routerLinkActive="active" class="nav-list-item">
+          <mat-icon mat-list-icon>local_laundry_service</mat-icon>
+          <div mat-line>Stare curentă mașini</div>
+        </a>
         <div mat-subheader>Rezervări</div>
         <a mat-list-item routerLink="user/reservations" routerLinkActive="active" class="nav-list-item">
           <mat-icon mat-list-icon>calendar_month</mat-icon>

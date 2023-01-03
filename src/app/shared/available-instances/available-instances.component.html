@@ -1,0 +1,41 @@
+<div class="header">
+  <div class="header-text">
+    <h1>Stare curentă</h1>
+    <div class="muted" *ngIf="!isLoading">
+      Actualizat la {{ lastUpdated | date: 'dd.MM.yyyy HH:mm' }}
+    </div>
+    <div class="muted" *ngIf="isLoading">
+      Se încarcă...
+    </div>
+  </div>
+  <button mat-icon-button (click)="getAvailableInstances()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-spinner *ngIf="isLoading && instances.length == 0" [diameter]="36"></mat-spinner>
+</div>
+
+<div class="results" fxLayout="row grid" fxLayoutGap="10px grid">
+  <div fxFlex="33" fxFlex.lt-lg="50" fxFlex.lt-sm="100" *ngFor="let instanceInfo of instances">
+    <mat-card class="instance-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <mat-icon>local_laundry_service</mat-icon>
+        </div>
+        <h2>{{ instanceInfo.instance.name }}</h2>
+        <div class="muted">{{ instanceInfo.instance.machine.make }} {{ instanceInfo.instance.machine.model }}</div>
+        <div class="status">
+          <span *ngIf="instanceInfo.instance.isFaulty" class="error">Defectă</span>
+          <span *ngIf="!instanceInfo.instance.isFaulty && instanceInfo.availableUntil" class="success">
+            Disponibilă până la {{ instanceInfo.availableUntil | date: 'd MMM, HH:mm' }}
+          </span>
+          <span *ngIf="!instanceInfo.instance.isFaulty && instanceInfo.busyUntil" class="warning">
+            Nu este disponibilă
+          </span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
