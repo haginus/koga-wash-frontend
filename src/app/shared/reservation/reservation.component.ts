@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { RESERVATION_STATUS, MACHINE_TYPES, USER_ROLES, isMobile, FLAG_REASONS } from 'src/app/lib/constants';
@@ -21,10 +22,12 @@ export class ReservationComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private reservationService: ReservationsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar,
   ) { }
 
   isLoading = true;
+  isLoadingAction = false;
   reservation: Reservation;
   user: User;
 
@@ -40,6 +43,10 @@ export class ReservationComponent implements OnInit {
   get canCheckIn() {
     return this.reservation?.status === ReservationStatus.PENDING &&
       Math.abs(this.startTime.getTime() - Date.now()) <= 5 * 60 * 1000;
+  }
+
+  get canCheckOut() {
+    return this.reservation?.status === ReservationStatus.CHECKED_IN;
   }
 
   get canCancel() {
@@ -85,8 +92,24 @@ export class ReservationComponent implements OnInit {
     });
   }
 
-  cancel() {
+  checkOut() {
+    this.isLoadingAction = true;
+    this.reservationService.checkOut(this.reservation.id).subscribe(reservation => {
+      this.isLoadingAction = false;
+      if(!reservation) return;
+      this.reservation = reservation;
+      this.snackbar.open("S-a făcut check-out pentru rezervare.");
+    });
+  }
 
+  cancel() {
+    this.isLoadingAction = true;
+    this.reservationService.cancel(this.reservation.id).subscribe(reservation => {
+      this.isLoadingAction = false;
+      if(!reservation) return;
+      this.snackbar.open("Rezervarea a fost anulată.");
+      this.reservation = reservation;
+    });
   }
 
 }
