@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RecaptchaComponent } from 'ng-recaptcha';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -19,15 +20,25 @@ export class LoginComponent implements OnInit {
 
   loading = false;
 
+  captchaToken: string = null;
+
+  @ViewChild('captcha') captchaComponent: RecaptchaComponent;
+
+  solvedCaptcha(captchaToken: string) {
+    this.captchaToken = captchaToken;
+  }
+
   ngOnInit(): void {
   }
 
   signIn(): void {
     const email = this.loginForm.get("email")?.value;
     const password = this.loginForm.get("password")?.value;
-    this.auth.signInWithEmailAndPassword(email, password).subscribe(res => {
+    this.auth.signInWithEmailAndPassword(email, password, this.captchaToken).subscribe(res => {
       if(res.user) {
         this.router.navigate(["/", res.user?.role]);
+      } else {
+        this.captchaComponent.reset();
       }
     });
   }

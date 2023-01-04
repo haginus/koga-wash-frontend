@@ -56,9 +56,12 @@ export class AuthService {
     );
   }
 
-  signInWithEmailAndPassword(email: string, password: string) : Observable<AuthResponse> {
+  signInWithEmailAndPassword(email: string, password: string, recaptcha: string) : Observable<AuthResponse> {
     const url = `${environment.apiUrl}/auth/login`;
-    return this.http.post<AuthResponse>(url, { email, password }).pipe(
+    const headers = new HttpHeaders({
+      recaptcha
+    });
+    return this.http.post<AuthResponse>(url, { email, password }, { headers }).pipe(
       map(res => {
         this.setToken(<string>res.access_token);
         this.userDataSource.next(res.user);

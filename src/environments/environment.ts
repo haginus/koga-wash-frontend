@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:3000"
+  apiUrl: "http://localhost:3000",
+  captchaKey: "6Lej98sjAAAAAAxWboSCN3cEynAsReDNmklg5Awb",
 };
 
 /*

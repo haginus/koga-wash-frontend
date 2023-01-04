@@ -13,6 +13,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { RecaptchaModule, RECAPTCHA_LANGUAGE, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,13 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     FlexLayoutModule,
     SharedModule,
     MatNativeDateModule,
+    RecaptchaModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'ro-RO' },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 4000 } },
+    { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.captchaKey, } },
+    { provide: RECAPTCHA_LANGUAGE, useValue: "ro-RO" },
   ],
   bootstrap: [AppComponent]
 })
