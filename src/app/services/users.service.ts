@@ -45,6 +45,22 @@ export class UsersService {
     );
   }
 
+  suspend(userId: string, until: Date): Observable<boolean> {
+    const url = `${environment.apiUrl}/users/${userId}/suspend`;
+    return this.http.post<any>(url, { until }, this.auth.getPrivateHeaders()).pipe(
+      map(_ => true),
+      catchError(this.handleError<boolean>('suspend', false))
+    );
+  }
+
+  unsuspend(userId: string): Observable<boolean> {
+    const url = `${environment.apiUrl}/users/${userId}/unsuspend`;
+    return this.http.post<any>(url, {}, this.auth.getPrivateHeaders()).pipe(
+      map(_ => true),
+      catchError(this.handleError<boolean>('unsuspend', false))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.snackbar.open(error?.error.message || 'Ceva nu a funcționat.');

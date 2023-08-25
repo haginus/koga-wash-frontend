@@ -8,6 +8,14 @@
       <mat-icon>delete</mat-icon>
       <span>Ștergeți utilizatorul</span>
     </button>
+    <button mat-menu-item *ngIf="!user.suspendedUntil" (click)="suspendUser(user)">
+      <mat-icon>close</mat-icon>
+      <span>Suspendați utilizatorul</span>
+    </button>
+    <button mat-menu-item *ngIf="user.suspendedUntil" (click)="unsuspendUser(user)">
+      <mat-icon>done</mat-icon>
+      <span>Activați utilizatorul</span>
+    </button>
     <button mat-menu-item (click)="resendActivationCode(user)">
       <mat-icon>token</mat-icon>
       <span>Retrimiteți e-mail activare</span>
@@ -36,6 +44,13 @@
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
           <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let row">
+            <mat-icon *ngIf="row.suspendedUntil" style="color: #F44336;" [matTooltip]="'Suspendat până la ' + row.suspendedUntil">close</mat-icon>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="lastName">

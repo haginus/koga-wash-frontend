@@ -13,6 +13,7 @@ import { MachineComponent } from './pages/machine/machine.component';
 import { ProgrammeDialogComponent } from './dialogs/programme-dialog/programme-dialog.component';
 import { InstanceDialogComponent } from './dialogs/instance-dialog/instance-dialog.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { SuspendUserDialogComponent } from './dialogs/suspend-user-dialog/suspend-user-dialog.component';
 
 
 const materialDeps = [
@@ -25,6 +26,7 @@ const materialDeps = [
   declarations: [
     UsersComponent,
     UserDialogComponent,
+    SuspendUserDialogComponent,
     MachinesComponent,
     MachineComponent,
     ProgrammeDialogComponent,

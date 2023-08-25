@@ -36,10 +36,13 @@
       </mat-form-field>
     </div>
     <div fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button color="primary" class="search-button left-icon" type="submit" [disabled]="lookupForm.invalid || isLoading">
+      <button mat-raised-button color="primary" class="search-button left-icon" type="submit" [disabled]="lookupForm.invalid || userIsSuspened || isLoading">
         <mat-icon>search</mat-icon>
         <span>Căutați</span>
       </button>
+    </div>
+    <div fxFlex="100" fxLayout="row" fxLayoutAlign="center center" *ngIf="userIsSuspened">
+      Contul dvs. este suspendat până la {{ user.suspendedUntil | date: 'd MMM yyyy' }}.
     </div>
   </form>
   <mat-progress-bar class="loading-bar" color="accent" *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

@@ -7,6 +7,7 @@ export interface User {
   phone: string;
   room: string;
   role: Role;
+  suspendedUntil: string;
 }
 
 export type Role = 'admin' | 'user' | 'system';

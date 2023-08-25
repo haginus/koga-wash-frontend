@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BehaviorSubject, map, merge, startWith, switchMap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent, UserDialogData } from '../../dialogs/user-dialog/user-dialog.component';
+import { SuspendUserDialogComponent } from '../../dialogs/suspend-user-dialog/suspend-user-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   constructor(private usersService: UsersService, private dialog: MatDialog) { }
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'room', 'email', 'phone', 'actions'];
+  displayedColumns: string[] = ['status', 'firstName', 'lastName', 'room', 'email', 'phone', 'actions'];
   data: User[] = [];
   resultsLength = 0;
   isLoadingResults = true;
@@ -39,7 +40,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
         return result.data;
       })
     ).subscribe(users => {
-      this.data = users;
+      const now = new Date();
+      this.data = users.map(user => {
+        const suspendedUntil = new Date(user.suspendedUntil);
+        user.suspendedUntil = suspendedUntil > now ? suspendedUntil.toLocaleDateString("ro-RO") : null;
+        return user;
+      });
     });
   }
 
@@ -76,6 +82,23 @@ export class UsersComponent implements OnInit, AfterViewInit {
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
+      if(!result) return;
+      this.refreshResults();
+    });
+  }
+
+  suspendUser(user: User) {
+    const dialogRef = this.dialog.open<SuspendUserDialogComponent, User>(SuspendUserDialogComponent, {
+      data: user
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if(!result) return;
+      this.refreshResults();
+    });
+  }
+
+  unsuspendUser(user: User) {
+    this.usersService.unsuspend(user.id).subscribe((result) => {
       if(!result) return;
       this.refreshResults();
     });

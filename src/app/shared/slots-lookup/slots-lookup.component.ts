@@ -11,6 +11,8 @@ import { roundToNearest10, stripTime } from 'src/app/lib/utils';
 import { ProgrammesService } from 'src/app/services/programmes.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { ReservationConfirmationDialogComponent, ReservationConfirmationDialogData } from '../reservation-confirmation-dialog/reservation-confirmation-dialog.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/lib/types/User';
 
 @Component({
   selector: 'app-slots-lookup',
@@ -20,6 +22,7 @@ import { ReservationConfirmationDialogComponent, ReservationConfirmationDialogDa
 export class SlotsLookupComponent implements OnInit {
 
   constructor(
+    private authService: AuthService,
     private programmesService: ProgrammesService, 
     private reservationsService: ReservationsService,
     private dialog: MatDialog,
@@ -32,6 +35,11 @@ export class SlotsLookupComponent implements OnInit {
   minDate = roundToNearest10();
   maxDate: Date;
   timeSteps: Date[] = [];
+  user: User;
+
+  get userIsSuspened() {
+    return this.user?.suspendedUntil !== null && new Date(this.user.suspendedUntil) > new Date();
+  }
 
   lookupForm = new FormGroup({
     machineKind: new FormControl('WashingMachine', [Validators.required]),
@@ -59,6 +67,9 @@ export class SlotsLookupComponent implements OnInit {
 
   ngOnInit(): void {
     this.calculateTimeSteps(this.since.value);
+    this.authService.userData.subscribe((user) => {
+      this.user = user;
+    });
     this.since.valueChanges.subscribe((value) => {
       if(value < this.minDate) {
         this.since.setValue(this.minDate);
