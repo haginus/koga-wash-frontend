@@ -26,6 +26,21 @@
   margin-right: -16px;
 
   .user-name {
-      margin-right: 8px;
+    margin-right: 8px;
+  }
+}
+
+.suspended-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 14px;
+  margin-right: 8px;
+  color: #F57C00;
+  cursor: default;
+
+  .text {
+    margin-left: 4px;
   }
 }

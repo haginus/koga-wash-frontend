@@ -24,6 +24,11 @@ export class AppComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   user: User | undefined = undefined;
 
+  get suspendedEndDate() {
+    if(!this.user || this.user.suspendedUntil === null) return null;
+    const date = new Date(this.user?.suspendedUntil);
+    return new Date(this.user.suspendedUntil).toLocaleDateString("ro-RO");
+  }
 
   constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) {}
 
