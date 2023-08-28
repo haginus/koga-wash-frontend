@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   get suspendedEndDate() {
     if(!this.user || this.user.suspendedUntil === null) return null;
     const date = new Date(this.user?.suspendedUntil);
+    if(date.getTime() < Date.now()) return null;
     return new Date(this.user.suspendedUntil).toLocaleDateString("ro-RO");
   }
 
