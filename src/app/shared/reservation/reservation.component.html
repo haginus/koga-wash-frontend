@@ -74,6 +74,9 @@
         <mat-list-item class="no-padding">
           <h4 matLine>Mașină</h4>
           <p matLine>{{ reservation.machineInstance.name }}</p>
+        </mat-list-item>
+        <mat-list-item class="no-padding">
+          <h4 matLine>Tip</h4>
           <p matLine>{{ MACHINE_TYPES[reservation.machineInstance.machine.kind] }}</p>
         </mat-list-item>
       </mat-list>
@@ -89,6 +92,10 @@
         <mat-list-item class="no-padding">
           <h4 matLine>Durată</h4>
           <p matLine>{{ reservation.programme.duration }} min.</p>
+        </mat-list-item>
+        <mat-list-item class="no-padding">
+          <h4 matLine>Tip material</h4>
+          <p matLine>{{ PROGRAMME_MATERIAL_KINDS[reservation.programme.materialKind] }}</p>
         </mat-list-item>
       </mat-list>
     </mat-card>

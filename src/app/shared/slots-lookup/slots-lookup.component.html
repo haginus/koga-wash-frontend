@@ -13,8 +13,9 @@
     <mat-form-field appearance="outline" fxFlex="50" fxFlex.lt-md="100">
       <mat-label>Program</mat-label>
       <mat-select formControlName="programme">
-        <mat-option *ngFor="let programme of filteredProgrammes" [value]="programme">
-          {{ programme.name }}
+        <mat-option *ngFor="let programme of filteredProgrammes" [value]="programme" [title]="programme.description || ''">
+          <span>{{ programme.name }}</span>
+          <span style="color: #757575;"> ({{ programme.duration }} min.)</span>
         </mat-option>
       </mat-select>
     </mat-form-field>

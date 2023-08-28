@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { RESERVATION_STATUS, MACHINE_TYPES, USER_ROLES, isMobile, FLAG_REASONS } from 'src/app/lib/constants';
+import { RESERVATION_STATUS, MACHINE_TYPES, USER_ROLES, isMobile, FLAG_REASONS, PROGRAMME_MATERIAL_KINDS } from 'src/app/lib/constants';
 import { Reservation, ReservationStatus } from 'src/app/lib/types/Reservation';
 import { User } from 'src/app/lib/types/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -33,6 +33,7 @@ export class ReservationComponent implements OnInit {
 
   RESERVATION_STATUS = RESERVATION_STATUS;
   MACHINE_TYPES = MACHINE_TYPES;
+  PROGRAMME_MATERIAL_KINDS = PROGRAMME_MATERIAL_KINDS;
   USER_ROLES = USER_ROLES;
   FLAG_REASONS = FLAG_REASONS;
 

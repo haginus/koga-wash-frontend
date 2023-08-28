@@ -18,7 +18,7 @@ export const PROGRAMME_MATERIAL_KINDS: Record<MaterialKind, string> = {
   [MaterialKind.SILK]: "Sătene",
   [MaterialKind.POLYESTER]: "Poliamidă",
   [MaterialKind.RAYON]: "Raiun",
-  [MaterialKind.LINEN]: "Lână",
+  [MaterialKind.LINEN]: "Pânză",
   [MaterialKind.MIXED]: "Mixt",
 }
 
