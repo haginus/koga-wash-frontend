@@ -55,8 +55,7 @@ export class ReservationComponent implements OnInit {
   }
 
   get hasMeta() {
-    return this.reservation?.meta !== undefined && Object.keys(this.reservation.meta).length > 0 &&
-      (this.reservation.meta.flags ? this.reservation.meta.flags.length > 0 : true);
+    return this.reservation?.meta !== undefined && Object.keys(this.reservation.meta).length > 0;
   }
 
   ngOnInit(): void {

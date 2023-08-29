@@ -4,9 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Paginated } from '../lib/types/Paginated';
-import { PaginatedQuery } from '../lib/types/PaginatedQuery';
 import { User } from '../lib/types/User';
 import { AuthService } from './auth.service';
+import { UserQueryDto } from '../lib/types/dto/user-query.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class UsersService {
 
   constructor(private auth: AuthService, private http: HttpClient, private snackbar: MatSnackBar) { }
 
-  findAll(options?: PaginatedQuery): Observable<Paginated<User>> {
+  findAll(options?: UserQueryDto): Observable<Paginated<User>> {
     const url = `${environment.apiUrl}/users/`;
 
     return this.http.get<Paginated<User>>(url, { ...this.auth.getPrivateHeaders(), params: { ...options } }).pipe(

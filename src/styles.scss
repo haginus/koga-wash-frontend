@@ -236,3 +236,24 @@ mat-toolbar.white {
     height: 16px!important;
   }
 }
+
+.searchable-select {
+  display: flex;
+  flex-direction: column;
+  max-height: 256px;
+  
+  .select-search-form {
+    display: flex;
+    padding: 6px;
+    box-sizing: border-box;
+    max-width: 100%;
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+
+  .results {
+    flex: 1;
+    overflow: auto;
+  }
+}
