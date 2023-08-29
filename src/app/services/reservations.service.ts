@@ -7,9 +7,9 @@ import { AvailableSlots } from '../lib/types/AvailableSlots';
 import { AvailableInstancesDto } from '../lib/types/dto/available-instances.dto';
 import { CreateReservationDto } from '../lib/types/dto/create-reservation.dto';
 import { Paginated } from '../lib/types/Paginated';
-import { PaginatedQuery } from '../lib/types/PaginatedQuery';
 import { Reservation } from '../lib/types/Reservation';
 import { AuthService } from './auth.service';
+import { ReservationQueryDto } from '../lib/types/dto/reservation-query.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ReservationsService {
 
   constructor(private auth: AuthService, private http: HttpClient, private snackbar: MatSnackBar) { }
 
-  findAll(opts: PaginatedQuery): Observable<Paginated<Reservation>> {
+  findAll(opts: ReservationQueryDto): Observable<Paginated<Reservation>> {
     const url = `${environment.apiUrl}/reservations/`;
     return this.http.get<Paginated<Reservation>>(url, { ...this.auth.getPrivateHeaders(), params: { ...opts } }).pipe(
       catchError(this.handleError<Paginated<Reservation>>('findAll', { count: 0, data: [] }))

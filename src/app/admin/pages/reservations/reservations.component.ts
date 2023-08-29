@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, merge, startWith, switchMap } from 'rxjs';
 import { RESERVATION_STATUS } from 'src/app/lib/constants';
@@ -20,22 +21,28 @@ export class ReservationsComponent implements AfterViewInit {
     private snackbar: MatSnackBar,
   ) { }
 
-  displayedColumns: string[] = ['instance', 'programme', 'user', 'interval', 'status', 'actions'];
+  displayedColumns: string[] = ['machineInstance.name', 'programme.name', 'user.lastName', 'startTime', 'status', 'actions'];
   data: ReservationTableEntry[] = [];
   resultsLength = 0;
   isLoadingResults = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   performedActions: BehaviorSubject<string> = new BehaviorSubject('');
 
   RESERVATION_STATUS = RESERVATION_STATUS;
 
   ngAfterViewInit(): void {
-    merge(this.paginator.page, this.performedActions).pipe(
+    merge(this.sort.sortChange, this.paginator.page, this.performedActions).pipe(
       startWith({}),
       switchMap(() => {
         this.isLoadingResults = true;
-        return this.reservationsService.findAll({ offset: this.paginator.pageIndex * this.paginator.pageSize, limit: this.paginator.pageSize });
+        return this.reservationsService.findAll({ 
+          offset: this.paginator.pageIndex * this.paginator.pageSize, 
+          limit: this.paginator.pageSize,
+          sortBy: this.sort.active as any,
+          sortDirection: this.sort.direction.toLocaleUpperCase() as any,
+        });
       }),
       map(result => {
         this.isLoadingResults = false;
