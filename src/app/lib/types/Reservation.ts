@@ -10,6 +10,7 @@ export interface Reservation {
   startTime: Date;
   endTime: Date;
   status: ReservationStatus;
+  energyUsage: number | null;
   meta: ReservationMeta;
 }
 

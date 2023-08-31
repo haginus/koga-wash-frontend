@@ -18,3 +18,12 @@ export function removeEmptyAttributes<T extends Object>(obj: T): T {
   }
   return newObj;
 }
+export type NotEmptyArray<T> = [T, ...T[]];
+
+type UnitType = { interval: [number, number], unit: string, transform: (value: number) => number | string };
+
+export function transformValue(value: number, units: NotEmptyArray<UnitType>, absoluteIntervals = true) {
+  const lookupValue = absoluteIntervals ? Math.abs(value) : value;
+  const unit = units.find(({ interval }) => interval[0] <= lookupValue && lookupValue < interval[1]) || units[0];
+  return unit.transform(value) + " " + unit.unit;
+}

@@ -9,6 +9,7 @@ import { User } from 'src/app/lib/types/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { ReservationCheckInDialogComponent } from '../reservation-check-in-dialog/reservation-check-in-dialog.component';
+import { transformValue } from 'src/app/lib/utils';
 
 @Component({
   selector: 'app-reservation',
@@ -56,6 +57,15 @@ export class ReservationComponent implements OnInit {
 
   get hasMeta() {
     return this.reservation?.meta !== undefined && Object.keys(this.reservation.meta).length > 0;
+  }
+
+  get energyUsageDisplay() {
+    const energyUsage = this.reservation?.energyUsage;
+    if(!energyUsage) return null;
+    return transformValue(energyUsage, [
+      { interval: [0, 1000], unit: "W", transform: (v) => v.toFixed(0) },
+      { interval: [1000, Infinity], unit: "kW", transform: (v) => (v / 1000).toFixed(2) },
+    ]);
   }
 
   ngOnInit(): void {
