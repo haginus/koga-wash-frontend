@@ -40,3 +40,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Certbot
+/docker/certbot
+
+# compose 
+docker-compose.override.yml

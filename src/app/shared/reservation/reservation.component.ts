@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { transformValue } from 'src/app/lib/utils';
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.scss']
 })
-export class ReservationComponent implements OnInit {
+export class ReservationComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +37,8 @@ export class ReservationComponent implements OnInit {
   PROGRAMME_MATERIAL_KINDS = PROGRAMME_MATERIAL_KINDS;
   USER_ROLES = USER_ROLES;
   FLAG_REASONS = FLAG_REASONS;
+  now = Date.now();
+  timeoutId: NodeJS.Timeout;
 
   get startTime() {
     return new Date(this.reservation?.startTime);
@@ -44,7 +46,7 @@ export class ReservationComponent implements OnInit {
 
   get canCheckIn() {
     return this.reservation?.status === ReservationStatus.PENDING &&
-      Math.abs(this.startTime.getTime() - Date.now()) <= 5 * 60 * 1000;
+      Math.abs(this.startTime.getTime() - this.now) <= 5 * 60 * 1000;
   }
 
   get canCheckOut() {
@@ -85,6 +87,13 @@ export class ReservationComponent implements OnInit {
       });
       this.isLoading = false;
     });
+    this.timeoutId = setTimeout(() => {
+      this.now = Date.now()
+    }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.timeoutId);
   }
 
   goBack() {

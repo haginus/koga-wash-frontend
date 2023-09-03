@@ -5,12 +5,12 @@ export const USER_ROLES = {
   "admin": "Administrator",
   "user": "Utilizator",
   "system": "Sistem",
-}
+} as const;
 
 export const MACHINE_TYPES = {
   "WashingMachine": "Mașină de spălat",
   "DryerMachine": "Uscător"
-}
+} as const;
 
 export const PROGRAMME_MATERIAL_KINDS: Record<MaterialKind, string> = {
   [MaterialKind.COTTON]: "Bumbac",
@@ -20,7 +20,7 @@ export const PROGRAMME_MATERIAL_KINDS: Record<MaterialKind, string> = {
   [MaterialKind.RAYON]: "Raiun",
   [MaterialKind.LINEN]: "Pânză",
   [MaterialKind.MIXED]: "Mixt",
-}
+} as const;
 
 export const RESERVATION_STATUS: Record<ReservationStatus, string> = {
   [ReservationStatus.PENDING]: "În așteptare",
@@ -28,10 +28,10 @@ export const RESERVATION_STATUS: Record<ReservationStatus, string> = {
   [ReservationStatus.FINISHED]: "Finalizată",
   [ReservationStatus.CANCELLED]: "Anulată",
   [ReservationStatus.NOT_HONORED]: "Neonorată",
-}
+} as const;
 
 export const FLAG_REASONS = {
   "clothes_left_behind": "Haine lăsate în mașină",
-}
+} as const;
 
 export const isMobile = window.innerWidth <= 768;
