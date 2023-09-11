@@ -23,6 +23,13 @@ export class UsersService {
     );
   }
 
+  findOne(userId: string): Observable<User> {
+    const url = `${environment.apiUrl}/users/${userId}`;
+    return this.http.get<User>(url, this.auth.getPrivateHeaders()).pipe(
+      catchError(this.handleError<User>('findOne', null))
+    );
+  }
+
   create(user: User): Observable<User> {
     const url = `${environment.apiUrl}/users/`;
     return this.http.post<User>(url, user, this.auth.getPrivateHeaders()).pipe(

@@ -62,10 +62,15 @@
             <mat-divider></mat-divider>
             <div mat-subheader>Semnalizări</div>
             <mat-list>
-              <mat-list-item *ngFor="let flag of reservation.meta.flags">
+              <mat-list-item *ngFor="let flag of reservation.meta.flags; index as index">
                 <mat-icon matListIcon>flag</mat-icon>
                 <h4 matLine>{{ FLAG_REASONS[flag.flagReason] }}</h4>
                 <p matLine>Raportat la {{ flag.flaggedAt | date: 'd MMM yyyy, HH:mm' }}</p>
+                <p matLine style="margin-left: -8px;">
+                  <app-user-snippet *ngIf="flagUsers[index]" [user]="flagUsers[index]">
+                    Raportor
+                  </app-user-snippet>
+                </p>
               </mat-list-item>
             </mat-list>
           </ng-container>

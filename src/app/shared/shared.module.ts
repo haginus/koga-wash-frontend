@@ -24,6 +24,7 @@ import { ReservationConfirmationDialogComponent } from './reservation-confirmati
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationCheckInDialogComponent } from './reservation-check-in-dialog/reservation-check-in-dialog.component';
 import { AvailableInstancesComponent } from './available-instances/available-instances.component';
+import { UserSnippetComponent } from './user-snippet/user-snippet.component';
 
 const materialDeps = [
   MatButtonModule,
@@ -52,6 +53,7 @@ const materialDeps = [
     ReservationComponent,
     ReservationCheckInDialogComponent,
     AvailableInstancesComponent,
+    UserSnippetComponent,
   ],
   imports: [
     CommonModule,
@@ -67,6 +69,7 @@ const materialDeps = [
     ReactiveFormsModule,
     FormsModule,
     SlotsLookupComponent,
+    UserSnippetComponent,
   ],
   providers: []
 })

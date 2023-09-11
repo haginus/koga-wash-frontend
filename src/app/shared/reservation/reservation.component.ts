@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, merge } from 'rxjs';
 import { RESERVATION_STATUS, MACHINE_TYPES, USER_ROLES, isMobile, FLAG_REASONS, PROGRAMME_MATERIAL_KINDS } from 'src/app/lib/constants';
 import { Reservation, ReservationStatus } from 'src/app/lib/types/Reservation';
 import { User } from 'src/app/lib/types/User';
@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { ReservationCheckInDialogComponent } from '../reservation-check-in-dialog/reservation-check-in-dialog.component';
 import { transformValue } from 'src/app/lib/utils';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-reservation',
@@ -23,6 +24,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     private router: Router,
     private auth: AuthService,
     private reservationService: ReservationsService,
+    public usersService: UsersService,
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
   ) { }
@@ -39,6 +41,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
   FLAG_REASONS = FLAG_REASONS;
   now = Date.now();
   timeoutId: NodeJS.Timeout;
+  flagUsers: User[] = [];
 
   get startTime() {
     return new Date(this.reservation?.startTime);
@@ -84,6 +87,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
           return;
         }
         this.reservation = reservation;
+        Promise.all(reservation.meta.flags.map(flag => firstValueFrom(this.usersService.findOne(flag.flaggedByUserId)))).then(users => {
+          this.flagUsers = users;
+        });
       });
       this.isLoading = false;
     });

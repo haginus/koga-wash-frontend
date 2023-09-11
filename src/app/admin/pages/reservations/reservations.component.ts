@@ -31,7 +31,7 @@ export class ReservationsComponent implements AfterViewInit {
     private snackbar: MatSnackBar,
   ) { }
 
-  displayedColumns: string[] = ['machineInstance.name', 'programme.name', 'user.lastName', 'startTime', 'status', 'actions'];
+  displayedColumns: string[] = ['icon', 'machineInstance.name', 'programme.name', 'user.lastName', 'startTime', 'status', 'actions'];
   data: ReservationTableEntry[] = [];
   resultsLength = 0;
   isLoadingResults = true;

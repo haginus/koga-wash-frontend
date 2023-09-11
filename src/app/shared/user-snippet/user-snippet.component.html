@@ -1,0 +1,49 @@
+<mat-menu #menu="matMenu">
+  <div (click)="$event.stopPropagation()" class="user-card" *ngIf="user">
+    <div class="user-card-header">
+      <div class="profile-picture">
+        <mat-icon>person</mat-icon>
+      </div>
+      <div class="header-text">
+        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+      </div>
+    </div>
+    <mat-list class="condense">
+      <mat-list-item>
+        <mat-icon mat-list-icon>mail</mat-icon>
+        <div mat-line>E-mail</div>
+        <div mat-line>
+          <a class="link" href="mailto:{{ user.email }}" target="_blank">
+            {{ user.email }}
+          </a>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>phone</mat-icon>
+        <div mat-line>Telefon</div>
+        <div mat-line>
+          <a class="link" href="tel:{{ user.phone }}" target="_blank">
+            {{ user.phone }}
+          </a>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngIf="user.room">
+        <mat-icon mat-list-icon>sensor_door</mat-icon>
+        <div mat-line>Camera</div>
+        <div mat-line>{{ user.room }}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-menu>
+
+<div class="user-snippet" [matMenuTriggerFor]="menu">
+  <div class="profile-picture">
+    <mat-icon>person</mat-icon>
+  </div>
+  <div class="text">
+    <div class="first-line">{{ user.firstName }} {{ user.lastName }}</div>
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
